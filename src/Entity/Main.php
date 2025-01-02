@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MainRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,17 @@ class Main
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $background_image = null;
+
+    /**
+     * @var Collection<int, Structure>
+     */
+    #[ORM\OneToMany(targetEntity: Structure::class, mappedBy: 'main')]
+    private Collection $structures;
+
+    public function __construct()
+    {
+        $this->structures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +73,36 @@ class Main
     public function setBackgroundImage(?string $background_image): static
     {
         $this->background_image = $background_image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Structure>
+     */
+    public function getStructures(): Collection
+    {
+        return $this->structures;
+    }
+
+    public function addStructure(Structure $structure): static
+    {
+        if (!$this->structures->contains($structure)) {
+            $this->structures->add($structure);
+            $structure->setMain($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStructure(Structure $structure): static
+    {
+        if ($this->structures->removeElement($structure)) {
+            // set the owning side to null (unless already changed)
+            if ($structure->getMain() === $this) {
+                $structure->setMain(null);
+            }
+        }
 
         return $this;
     }
