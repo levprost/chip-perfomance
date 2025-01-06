@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Structure index{% endblock %}
+
+{% block body %}
+    <h1>Structure index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Image structure</th>
+                <th>Content structure</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for structure in structures %}
+            <tr>
+                <td>{{ structure.id }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ structure.imageStructure) }}" width="100"></td>
+                <td>{{ structure.contentStructure }}</td>
+                <td>
+                    <a href="{{ path('app_structure_show', {'id': structure.id}) }}">show</a>
+                    <a href="{{ path('app_structure_edit', {'id': structure.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_structure_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Main{% endblock %}
+
+{% block body %}
+    <h1>Create new Main</h1>
+
+    {{ include('main/_form.html.twig') }}
+
+    <a href="{{ path('app_main_index') }}">back to list</a>
+{% endblock %}

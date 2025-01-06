@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Main{% endblock %}
+
+{% block body %}
+    <h1>Main</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ main.id }}</td>
+            </tr>
+            <tr>
+                <th>Title_main</th>
+                <td>{{ main.titleMain }}</td>
+            </tr>
+            <tr>
+                <th>Optional_content</th>
+                <td>{{ main.optionalContent }}</td>
+            </tr>
+            <tr>
+                <th>Background_image</th>
+                <video width="100" controls>
+                    <source src="{{ asset('uploads/videos/' ~ main.backgroundImage) }}" type="video/mp4">
+                    Votre navigateur ne supporte pas la balise video.
+                </video>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_main_index') }}">back to list</a>
+
+    <a href="{{ path('app_main_edit', {'id': main.id}) }}">edit</a>
+
+    {{ include('main/_delete_form.html.twig') }}
+{% endblock %}

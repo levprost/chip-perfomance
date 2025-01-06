@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Main index{% endblock %}
+
+{% block body %}
+    <h1>Main index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title_main</th>
+                <th>Optional_content</th>
+                <th>Background_image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for main in mains %}
+            <tr>
+                <td>{{ main.id }}</td>
+                <td>{{ main.titleMain }}</td>
+                <td>{{ main.optionalContent }}</td>
+                 <video width="100" controls>
+                    <source src="{{ asset('uploads/videos/' ~ main.backgroundImage) }}" type="video/mp4">
+                    Votre navigateur ne supporte pas la balise video.
+                </video>
+                <td>
+                    <a href="{{ path('app_main_show', {'id': main.id}) }}">show</a>
+                    <a href="{{ path('app_main_edit', {'id': main.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_main_new') }}">Create new</a>
+{% endblock %}
