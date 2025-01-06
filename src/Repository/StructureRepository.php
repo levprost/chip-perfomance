@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Main;
 use App\Entity\Structure;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Structure>
@@ -15,7 +16,7 @@ class StructureRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Structure::class);
     }
-
+       
     //    /**
     //     * @return Structure[] Returns an array of Structure objects
     //     */

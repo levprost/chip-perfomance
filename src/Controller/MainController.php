@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Main;
+use App\Entity\Structure;
 use App\Form\MainType;
 use App\Repository\MainRepository;
+use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,15 +26,18 @@ final class MainController extends AbstractController
     }
 
     #[Route(name: 'app_main_index', methods: ['GET'])]
-    public function index(MainRepository $mainRepository): Response
+    public function index(MainRepository $mainRepository, StructureRepository $structureRepository): Response
     {
         $mains = $mainRepository->findAll();
+        $structures = $structureRepository->findAll();
         foreach ($mains as $main) {
             $backgroundImage = $main->getBackgroundImage();
             $main->isVideo = $this->isVideo($backgroundImage);
+            
         }
         return $this->render('main/index.html.twig', [
             'mains' => $mains,
+            'structures' => $structures,
         ]);
     }
     // Méthode qui permet de vérifier le type de background_image
