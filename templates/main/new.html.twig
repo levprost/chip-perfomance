@@ -3,9 +3,17 @@
 {% block title %}New Main{% endblock %}
 
 {% block body %}
-    <h1>Create new Main</h1>
+<div class="container-fluid my-4">
+    <h1 class="text-center mb-4">Create New Main</h1>
 
-    {{ include('main/_form.html.twig') }}
+    <div class="row justify-content-center">
+        <div class="col-12">
+            {{ include('main/_form.html.twig') }}
+        </div>
+    </div>
 
-    <a href="{{ path('app_main_index') }}">back to list</a>
+    <div class="text-center mt-4">
+        <a class="btn btn-primary" href="{{ path('app_main_index') }}">Back to List</a>
+    </div>
+</div>
 {% endblock %}

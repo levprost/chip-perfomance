@@ -1,4 +1,33 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            {{ form_start(form) }}
+            
+            <div class="mb-3">
+                {{ form_label(form.title_main, 'Enter your title', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.title_main, {'attr': {'class': 'form-control', 'placeholder': 'Title'}}) }}
+                {{ form_errors(form.title_main) }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form_label(form.optional_content, 'Enter optional content', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.optional_content, {'attr': {'class': 'form-control', 'placeholder': 'Optional'}}) }}
+                {{ form_errors(form.optional_content) }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form_label(form.background_image, 'Enter image or video', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.background_image, {'attr': {'class': 'form-control', 'placeholder': 'Image/Video'}}) }}
+                {{ form_errors(form.background_image) }}
+            </div>
+            
+            {{ form_rest(form) }}
+            
+            <button class="btn btn-success w-100" type="submit">
+                {{ button_label|default('Save') }}
+            </button>
+            
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
