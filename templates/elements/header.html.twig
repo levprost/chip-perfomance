@@ -1,14 +1,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-black">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('app_main') }}" style="color:white;">Composants</a>
+    <a class="navbar-brand" href="{{ path('app_main_index') }}" style="color:white;">Composants</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('app_main') }}" style="color:white;"><i class="fa fa-home" aria-hidden="true"></i></a>
+          <a class="nav-link active" aria-current="page" href="{{ path('app_main_index') }}" style="color:white;"><i class="fa fa-home" aria-hidden="true"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="" style="color:white;">Actualité</a>
@@ -16,7 +16,7 @@
 
         <li class="nav-item">
             {% if app.user %}
-              <a class="nav-link contact" href="{{ path('contact') }}" style="color:white;">Contactez nous</a>
+              <a class="nav-link contact" href="" style="color:white;">Contactez nous</a>
             {% else %}
               <a class="nav-link contact" href="{{ path('app_login') }}" style="color:white;">Contactez nous</a>
             {% endif %}
@@ -26,35 +26,20 @@
       <div class="header-social-links">
         {% if app.user %}
           {% if app.user.opption is same as ('yes') %}
-              {% if app.user.avatar is empty %}
                 <i class="fa-solid fa-circle-user" style="color: white"></i>
                 <span class="zxfirstname" style="text-decoration:none;">{{ app.user.psuedo|capitalize }}</span>
                 <a class="loggouts mr-2" href="{{ path('app_logout') }}">
                   <i class="fa solid fa-power-off" style="color: white"></i>
                 </a>
-                <a class="zxadmin mr-2" href="{{ path('admin') }}">
+                <a class="zxadmin mr-2" href="{{ path('app_home') }}">
                   <i class="fa fa-circle-play" style="color: white"></i>
                 </a>
-                {% else %}
-                <img class="roundedImage" src="{{ asset('divers/avatars/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
-                <span class="zxfirstname">{{ app.user.psuedo|capitalize }}</span>
-                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: white"></i></a>
-                <a class="zxadmin mr-2" href="{{ path('admin') }}">
-                  <i class="fa fa-circle-play" style="color: white"></i>
-                </a>
-              {% endif %}
           {% else %}
-            {% if app.user.avatar is empty %}
                 <i class="fa-solid fa-circle-user" style="color: white"></i>
-                <span class="zxfirstname" style="text-decoration:none;">{{ app.user.psuedo|capitalize }}</span>
-                <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                  <i class="fa solid fa-power-off" style="color: white"></i>
-                </a>
-              {% else %}
-                <img class="roundedImage" src="{{ asset('divers/avatars/' ~ app.user.avatar) }}" style="width:25px; height:25px; border-radius:50%">&ensp;
-                <span class="zxfirstname">{{ app.user.psuedo|capitalize }}</span>
-                <a class="loggouts" href="{{ path('app_logout') }}">&ensp;<i class="fa-solid fa-power-off" style="color: white"></i></a>
-            {% endif %}
+                    <span class="zxfirstname" style="text-decoration:none;">{{ app.user.psuedo|capitalize }}</span>
+                    <a class="loggouts mr-2" href="{{ path('app_logout') }}">
+                    <i class="fa solid fa-power-off" style="color: white"></i>
+                </a>  
           {% endif %}
         {% else %}
             <a class="login" href="{{ path('app_login') }}">

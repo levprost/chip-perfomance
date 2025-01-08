@@ -37,6 +37,8 @@
         {% endblock %}
     </head>
     <body>
+        {{ include('elements/header.html.twig') }}
         {% block body %}{% endblock %}
+        {{ include('elements/footer.html.twig') }}
     </body>
 </html>
