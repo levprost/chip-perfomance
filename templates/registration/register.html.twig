@@ -3,17 +3,60 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
+<div class="container-fluid  mt-5" style="margin-bottom: 36px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                
+            </div>
+            <div class="col-md-6">
+                <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                <form method="post" enctype="multipart/form-data">
+                {{ form_errors(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                {{ form_start(registrationForm) }}
+                    
+                    
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.email, {attr:{class:'form-control', placeholder: 'Email'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.first_name, {attr:{class:'form-control', placeholder: 'Prénom'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.last_name, {attr:{class:'form-control', placeholder: 'Nom'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_widget(registrationForm.plainPassword, {label: 'Password', attr:{class:'form-control', placeholder: 'Entrez votre password'}
+                        
+                    }) }}
+                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="submit"class="btn btn-success">Register</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                 <div class="col-md-6">
+                                    Déjà inscrit?
+                                 </div>
+                                 <div class="col-md-6">
+                                    <a class="btn btn-md btn-primary" href="{{path('app_login')}}">Login</a>
+                                 </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {{ form_end(registrationForm) }}
+                <form>
+            </div>
+            <div class="col-md-3">
+                
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
