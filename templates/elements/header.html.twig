@@ -12,15 +12,16 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link contact" href="" style="color:white;">Contactez nous</a>
+          <a class="nav-link contact" href="{{ path('app_contact_new') }}" style="color:white;">Contactez nous</a>
         </li>
 
         <!-- Dropdown menu -->
+
+        {% if app.user and app.user.opption is same as('yes') %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
             Admin Menu
           </a>
-          {% if app.user.opption is same as('yes') %}
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
               <a class="dropdown-item" href="{{ path('app_user_default_index') }}">Détails de fichiers</a>
@@ -34,10 +35,13 @@
             <li>
               <a class="dropdown-item" href="{{ path('app_home') }}">Changer la page d'accueil</a>
             </li>
+            <li>
+              <a class="dropdown-item" href="{{ path('app_contact_index') }}">Voir message d'utilisateur</a>
+            </li>
           </ul>
-          {% endif %}
         </li>
       </ul>
+      {% endif %}
 
       <div class="header-social-links">
         {% if app.user %}
