@@ -1,35 +1,98 @@
-.background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
-    filter: brightness(50%)
-}
-.background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
-
-}
-.content {
-    position: relative;
-    z-index: 1;
-    color: white; /* Текст белого цвета для контраста */
-}
-.main-block {
-    position: relative;
-    width: 100%;
-    height: 100vh; 
-    overflow: hidden;
-    margin-bottom: 0px;
-}
-body{
+body {
     margin: 0;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    line-height: 1.5;
+    color: #fff;
+}
+
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.5);
+}
+
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.hero-content {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.125rem, 4vw, 1.5rem);
+    margin: 0 0 2rem;
+    opacity: 0.9;
+}
+
+.structures-container {
+    margin: 2rem 0;
+}
+
+.structure-item {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.structure-item p {
+    margin: 0;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #282929;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #027cff;
+    color: rgb(0, 0, 0);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 1rem;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+    }
 }

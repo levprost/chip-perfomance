@@ -3,9 +3,17 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+<div class="container">
+    <div class="form-wrapper">
+        <h1 class="form-title">Create New File</h1>
 
-    {{ include('user_default/_form.html.twig') }}
+        <div class="form-content mt-3">
+            {{ include('user_default/_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_user_default_index') }}">back to list</a>
+        <div class="back-link mt-3">
+            <a href="{{ path('app_user_default_index') }}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

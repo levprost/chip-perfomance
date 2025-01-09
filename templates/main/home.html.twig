@@ -21,10 +21,6 @@
                 <td>{{ main.id }}</td>
                 <td>{{ main.titleMain }}</td>
                 <td>{{ main.optionalContent }}</td>
-                 <video width="100" controls>
-                    <source src="{{ asset('uploads/videos/' ~ main.backgroundImage) }}" type="video/mp4">
-                    Votre navigateur ne supporte pas la balise video.
-                </video>
                 <td>
                     <a href="{{ path('app_main_show', {'id': main.id}) }}">show</a>
                     <a href="{{ path('app_main_edit', {'id': main.id}) }}">edit</a>

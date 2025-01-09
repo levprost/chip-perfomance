@@ -1,50 +1,66 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-black">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('app_main_index') }}" style="color:white;">Composants</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="align-items: center;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('app_main_index') }}" style="color:white;"><i class="fa fa-home" aria-hidden="true"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" style="color:white;">Actualité</a>
+          <a class="nav-link active" aria-current="page" href="{{ path('app_main_index') }}" style="color:white;">
+            <img class="brand logo" style="width:50px;border-radius:25px;" src="{{ asset('uploads/images/logo.png') }}">
+          </a>
         </li>
 
         <li class="nav-item">
-            {% if app.user %}
-              <a class="nav-link contact" href="" style="color:white;">Contactez nous</a>
-            {% else %}
-              <a class="nav-link contact" href="{{ path('app_login') }}" style="color:white;">Contactez nous</a>
-            {% endif %}
+          <a class="nav-link contact" href="" style="color:white;">Contactez nous</a>
+        </li>
+
+        <!-- Dropdown menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:white;">
+            Admin Menu
+          </a>
+          {% if app.user.opption is same as('yes') %}
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{{ path('app_user_default_index') }}">Détails de fichiers</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ path('app_user_index') }}">Afficher utilisateur</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ path('app_structure_index') }}">Afficher structure</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{{ path('app_home') }}">Changer la page d'accueil</a>
+            </li>
+          </ul>
+          {% endif %}
         </li>
       </ul>
 
       <div class="header-social-links">
         {% if app.user %}
           {% if app.user.opption is same as ('yes') %}
-                <i class="fa-solid fa-circle-user" style="color: white"></i>
-                <span class="zxfirstname" style="text-decoration:none;">{{ app.user.psuedo|capitalize }}</span>
-                <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                  <i class="fa solid fa-power-off" style="color: white"></i>
-                </a>
-                <a class="zxadmin mr-2" href="{{ path('app_home') }}">
-                  <i class="fa fa-circle-play" style="color: white"></i>
-                </a>
+            <i class="fa-solid fa-circle-user" style="color: white"></i>
+            <span class="zxfirstname" style="text-decoration:none;color: white">{{ app.user.lastName|capitalize }}</span>
+            <a class="loggouts mr-2" href="{{ path('app_logout') }}">
+              <i class="fa solid fa-power-off" style="color: white"></i>
+            </a>
+            <a class="zxadmin mr-2" href="{{ path('app_home') }}">
+              <i class="fa fa-circle-play" style="color: white"></i>
+            </a>
           {% else %}
-                <i class="fa-solid fa-circle-user" style="color: white"></i>
-                    <span class="zxfirstname" style="text-decoration:none;">{{ app.user.psuedo|capitalize }}</span>
-                    <a class="loggouts mr-2" href="{{ path('app_logout') }}">
-                    <i class="fa solid fa-power-off" style="color: white"></i>
-                </a>  
+            <i class="fa-solid fa-circle-user" style="color: white"></i>
+            <span class="zxfirstname" style="text-decoration:none;color: white">{{ app.user.lastName|capitalize }}</span>
+            <a class="loggouts mr-2" href="{{ path('app_logout') }}">
+              <i class="fa solid fa-power-off" style="color: white"></i>
+            </a>
           {% endif %}
         {% else %}
-            <a class="login" href="{{ path('app_login') }}">
-              <i class="fa-regular fa-circle-user" style="color: white"></i>&ensp;
-            </a>
+          <a class="login" href="{{ path('app_login') }}">
+            <i class="fa-regular fa-circle-user" style="color: white"></i>&ensp;
+          </a>
         {% endif %}
       </div>
     </div>

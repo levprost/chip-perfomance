@@ -6,16 +6,18 @@ use App\Entity\Structure;
 use App\Form\StructureType;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface; 
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/structure')]
 final class StructureController extends AbstractController
 {
     #[Route(name: 'app_structure_index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(StructureRepository $structureRepository): Response
     {
         return $this->render('structure/index.html.twig', [
@@ -24,6 +26,7 @@ final class StructureController extends AbstractController
     }
 
     #[Route('/new', name: 'app_structure_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager, StructureRepository $StructureRepository, SluggerInterface $slugger): Response
     {
         $structure = new Structure();
@@ -56,6 +59,7 @@ final class StructureController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_structure_show', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function show(Structure $structure): Response
     {
         return $this->render('structure/show.html.twig', [
@@ -64,6 +68,7 @@ final class StructureController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_structure_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Structure $structure, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(StructureType::class, $structure);
@@ -93,6 +98,7 @@ final class StructureController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_structure_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Structure $structure, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$structure->getId(), $request->getPayload()->getString('_token'))) {

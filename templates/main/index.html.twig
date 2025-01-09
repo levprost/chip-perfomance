@@ -1,30 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Main index
-{% endblock %}
+{% block title %}Main Index{% endblock %}
 
 {% block body %}
-	{% for main in mains %}
-    <div class="main-block">
-    {% if main.isVideo %}
-        <video class="background-video" autoplay loop muted>
-            <source src="{{ asset('uploads/videos/' ~ main.backgroundImage) }}" type="video/mp4">
-        </video>
-    {% else %}
-        <img class="background-image" src="{{ asset('uploads/videos/' ~ main.backgroundImage) }}">
-    {% endif %}
-        <div class="content">
-            <h1>{{ main.titleMain }}</h1>
-            <h3>{{ main.optionalContent }}</h3>
-            <ul class="structure-list">
-            {% for structure in main.structures %}
-                <p>{{ structure.contentStructure }}</p>
-            {% endfor %}
+    {% for main in mains %}
+        <div class="hero-section {% if main.id > 1 %}content-section{% endif %}">
+            {% if main.isVideo %}
+                <video class="background-media" autoplay loop muted playsinline>
+                    <source src="{{ asset('uploads/videos/' ~ main.backgroundImage) }}" type="video/mp4">
+                </video>
+            {% else %}
+                <img class="background-media" src="{{ asset('uploads/videos/' ~ main.backgroundImage) }}" alt="{{ main.titleMain }}">
+            {% endif %}
+            
+            <div class="content-wrapper">
+                <div class="hero-content">
+                    <h1 class="hero-title">{{ main.titleMain }}</h1>
+                    {% if main.optionalContent %}
+                        <p class="hero-subtitle">{{ main.optionalContent }}</p>
+                    {% endif %}
+                    
+                    {% if main.structures|length > 0 %}
+                        <div class="structures-container">
+                            {% for structure in main.structures %}
+
+                                    <div class="structure-item ">
+                                        <div class="structure-text">
+                                            <p>{{ structure.contentStructure }}</p>
+                                        </div>
+                                        {% if main.id > 1 and structure.imageStructure %}
+                                            <div class="structure-image">
+                                                <img src="{{ asset('uploads/images/' ~ structure.imageStructure) }}" alt="{{ structure.imageStructure }}" class="img-fluid">
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
+                    {% if main.id == 1 %}
+                        {% if app.user is null %}
+                            <a href="{{ path('app_register') }}" class="cta-button">Inscrivez-vous maintenant</a>
+                        {% else %}
+                            <a href="{{ path('app_user_default_new') }}" class="cta-button">Envoyez votre configuration</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </div>
-{% else %}
-    <p>No records found</p>
-{% endfor %}
-
-
+    {% endfor %}
 {% endblock %}
